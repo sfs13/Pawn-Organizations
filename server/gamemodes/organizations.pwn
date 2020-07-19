@@ -159,12 +159,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				inputName[64];
 
 			if(sscanf(inputtext, "s[64]", inputName) || strlen(inputtext) > 64)
-				return ShowPlayerDialog(playerid, dCreateOrg, DIALOG_STYLE_INPUT, !"Создание организации", !"{FFFFFF}Введите название организации (макс. длина - 64 символа):", !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dCreateOrg, DIALOG_STYLE_INPUT, !"РЎРѕР·РґР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё (РјР°РєСЃ. РґР»РёРЅР° - 64 СЃРёРјРІРѕР»Р°):", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 
 			format_mysql("INSERT INTO `organizations` (`name`, `leader`) VALUES ('%s', '%s')", inputName, GetName(playerid));
 			mysql_tquery(dbHandle, mysqlString, !"@CreateOrganization", !"is", playerid, inputName);
 
-			format_string("Вы успешно создали организацию '%s'", inputName);
+			format_string("Р’С‹ СѓСЃРїРµС€РЅРѕ СЃРѕР·РґР°Р»Рё РѕСЂРіР°РЅРёР·Р°С†РёСЋ '%s'", inputName);
 			SendClientMessage(playerid, 0x00FF00FF, formatString);
 		}
 		case dLeaveOrg:
@@ -193,11 +193,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SaveAccount(i);
 
 						if(i != playerid)
-							SendClientMessage(i, 0xFF0000FF, !"[O] Ваша организация была распущена лидером");
+							SendClientMessage(i, 0xFF0000FF, !"[O] Р’Р°С€Р° РѕСЂРіР°РЅРёР·Р°С†РёСЏ Р±С‹Р»Р° СЂР°СЃРїСѓС‰РµРЅР° Р»РёРґРµСЂРѕРј");
 					}
 				}
 
-				SendClientMessage(playerid, 0xFF0000FF, !"Вы покинули организацию, тем самым распустив её");
+				SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РїРѕРєРёРЅСѓР»Рё РѕСЂРіР°РЅРёР·Р°С†РёСЋ, С‚РµРј СЃР°РјС‹Рј СЂР°СЃРїСѓСЃС‚РёРІ РµС‘");
 
 				ClearOrganization(org);
 			}
@@ -206,7 +206,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				pInfo[playerid][pOrganization] =
 				pInfo[playerid][pOrgRank] = 0;
 
-				SendClientMessage(playerid, 0xFF0000FF, !"Вы покинули организацию");
+				SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РїРѕРєРёРЅСѓР»Рё РѕСЂРіР°РЅРёР·Р°С†РёСЋ");
 			}
 
 			SaveAccount(playerid);
@@ -216,7 +216,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(!response)
 			{
-				format_string("%s отказался от предложения вступить в Вашу организацию", GetName(playerid));
+				format_string("%s РѕС‚РєР°Р·Р°Р»СЃСЏ РѕС‚ РїСЂРµРґР»РѕР¶РµРЅРёСЏ РІСЃС‚СѓРїРёС‚СЊ РІ Р’Р°С€Сѓ РѕСЂРіР°РЅРёР·Р°С†РёСЋ", GetName(playerid));
 				SendClientMessage(pInfo[playerid][pOfferPlayer], 0xFF0000FF, formatString);
 			}
 			else
@@ -228,16 +228,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				pInfo[playerid][pOrganization] = org;
 				pInfo[playerid][pOrgRank] = 1;
 
-				SendClientMessage(playerid, 0x00FF00FF, "Вы приняли предложение вступить в организацию");
+				SendClientMessage(playerid, 0x00FF00FF, "Р’С‹ РїСЂРёРЅСЏР»Рё РїСЂРµРґР»РѕР¶РµРЅРёРµ РІСЃС‚СѓРїРёС‚СЊ РІ РѕСЂРіР°РЅРёР·Р°С†РёСЋ");
 
-				format_string("%s принял предложение вступить в Вашу организацию", GetName(playerid));
+				format_string("%s РїСЂРёРЅСЏР» РїСЂРµРґР»РѕР¶РµРЅРёРµ РІСЃС‚СѓРїРёС‚СЊ РІ Р’Р°С€Сѓ РѕСЂРіР°РЅРёР·Р°С†РёСЋ", GetName(playerid));
 				SendClientMessage(pInfo[playerid][pOfferPlayer], 0x00FF00FF, formatString);
 
 				foreach(new i : Player)
 				{
 					if(pInfo[i][pOrganization] == org)
 					{
-						format_string("[O] %s вступил в организацию", GetName(playerid));
+						format_string("[O] %s РІСЃС‚СѓРїРёР» РІ РѕСЂРіР°РЅРёР·Р°С†РёСЋ", GetName(playerid));
 						SendClientMessage(i, 0xFFFF00FF, formatString);
 					}
 				}
@@ -258,9 +258,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 0:
 					cmd_orgonline(playerid);
 				case 1:
-					ShowPlayerDialog(playerid, dChangeNameOrg, DIALOG_STYLE_INPUT, !"Смена название", !"{FFFFFF}Введите новое название для организации:", !"Далее", !"Отмена");
+					ShowPlayerDialog(playerid, dChangeNameOrg, DIALOG_STYLE_INPUT, !"РЎРјРµРЅР° РЅР°Р·РІР°РЅРёРµ", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РЅР°Р·РІР°РЅРёРµ РґР»СЏ РѕСЂРіР°РЅРёР·Р°С†РёРё:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 				case 2:
-					ShowPlayerDialog(playerid, dInvitePlayerOrg, DIALOG_STYLE_INPUT, !"Пригласить игрока", !"{FFFFFF}Введите ID игрока, которого Вы хотите пригласить:", !"Далее", !"Отмена");
+					ShowPlayerDialog(playerid, dInvitePlayerOrg, DIALOG_STYLE_INPUT, !"РџСЂРёРіР»Р°СЃРёС‚СЊ РёРіСЂРѕРєР°", !"{FFFFFF}Р’РІРµРґРёС‚Рµ ID РёРіСЂРѕРєР°, РєРѕС‚РѕСЂРѕРіРѕ Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРёРіР»Р°СЃРёС‚СЊ:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 				case 3:
 				{
 					new
@@ -279,16 +279,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						strcat(ranks, currentRank);
 					}
 
-					ShowPlayerDialog(playerid, dChangeRanksOrg, DIALOG_STYLE_LIST, !"Выберите ранг", ranks, !"Далее", !"Отмена");
+					ShowPlayerDialog(playerid, dChangeRanksOrg, DIALOG_STYLE_LIST, !"Р’С‹Р±РµСЂРёС‚Рµ СЂР°РЅРі", ranks, !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 				}
 				case 4:
-					ShowPlayerDialog(playerid, dSetRankOrg, DIALOG_STYLE_INPUT, !"Изменить ранг игроку", !"{FFFFFF}Введите ID игрока и ранг через запятую\n\n{AFAFAF}Например: 34,2", !"Далее", !"Отмена");
+					ShowPlayerDialog(playerid, dSetRankOrg, DIALOG_STYLE_INPUT, !"РР·РјРµРЅРёС‚СЊ СЂР°РЅРі РёРіСЂРѕРєСѓ", !"{FFFFFF}Р’РІРµРґРёС‚Рµ ID РёРіСЂРѕРєР° Рё СЂР°РЅРі С‡РµСЂРµР· Р·Р°РїСЏС‚СѓСЋ\n\n{AFAFAF}РќР°РїСЂРёРјРµСЂ: 34,2", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 				case 5:
-					ShowPlayerDialog(playerid, dUninviteOrg, DIALOG_STYLE_INPUT, !"Выгнать игрока Online", !"{FFFFFF}Введите ID игрока, которого Вы хотите выгнать:", !"Далее", !"Отмена");
+					ShowPlayerDialog(playerid, dUninviteOrg, DIALOG_STYLE_INPUT, !"Р’С‹РіРЅР°С‚СЊ РёРіСЂРѕРєР° Online", !"{FFFFFF}Р’РІРµРґРёС‚Рµ ID РёРіСЂРѕРєР°, РєРѕС‚РѕСЂРѕРіРѕ Р’С‹ С…РѕС‚РёС‚Рµ РІС‹РіРЅР°С‚СЊ:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 				case 6:
-					ShowPlayerDialog(playerid, dOffUninviteOrg, DIALOG_STYLE_INPUT, !"Выгнать игрока Offline", !"{FFFFFF}Введите ник игрока, которого Вы хотите выгнать в Offline:", !"Далее", !"Отмена");
+					ShowPlayerDialog(playerid, dOffUninviteOrg, DIALOG_STYLE_INPUT, !"Р’С‹РіРЅР°С‚СЊ РёРіСЂРѕРєР° Offline", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅРёРє РёРіСЂРѕРєР°, РєРѕС‚РѕСЂРѕРіРѕ Р’С‹ С…РѕС‚РёС‚Рµ РІС‹РіРЅР°С‚СЊ РІ Offline:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 				case 7:
-					ShowPlayerDialog(playerid, dDisbandOrg, DIALOG_STYLE_MSGBOX, !"Распустить организацию", !"{FFFFFF}Вы уверены, что хотите распустить организацию?", !"Да", !"Отмена");
+					ShowPlayerDialog(playerid, dDisbandOrg, DIALOG_STYLE_MSGBOX, !"Р Р°СЃРїСѓСЃС‚РёС‚СЊ РѕСЂРіР°РЅРёР·Р°С†РёСЋ", !"{FFFFFF}Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СЂР°СЃРїСѓСЃС‚РёС‚СЊ РѕСЂРіР°РЅРёР·Р°С†РёСЋ?", !"Р”Р°", !"РћС‚РјРµРЅР°");
 			}
 		}
 
@@ -303,13 +303,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(sscanf(inputtext, "s[64]", inputName) || strlen(inputName) > 64)
 			{
-				ShowPlayerDialog(playerid, dChangeNameOrg, DIALOG_STYLE_INPUT, !"Смена название", !"{FFFFFF}Введите новое название для организации:", !"Далее", !"Отмена");
-				return SendClientMessage(playerid, 0xFF0000FF, !"Введите корректное название (макс. длина - 64 символа)");
+				ShowPlayerDialog(playerid, dChangeNameOrg, DIALOG_STYLE_INPUT, !"РЎРјРµРЅР° РЅР°Р·РІР°РЅРёРµ", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РЅР°Р·РІР°РЅРёРµ РґР»СЏ РѕСЂРіР°РЅРёР·Р°С†РёРё:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
+				return SendClientMessage(playerid, 0xFF0000FF, !"Р’РІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅРѕРµ РЅР°Р·РІР°РЅРёРµ (РјР°РєСЃ. РґР»РёРЅР° - 64 СЃРёРјРІРѕР»Р°)");
 			}
 
 			SetString(orgInfo[org][orgName], inputName);
 
-			format_string("Вы успешно сменили название на '%s'", inputName);
+			format_string("Р’С‹ СѓСЃРїРµС€РЅРѕ СЃРјРµРЅРёР»Рё РЅР°Р·РІР°РЅРёРµ РЅР° '%s'", inputName);
 			SendClientMessage(playerid, 0x00FF00FF, formatString);
 
 			SaveOrganization(org);
@@ -324,7 +324,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				targetid;
 
 			if(sscanf(inputtext, "d", targetid))
-				return ShowPlayerDialog(playerid, dInvitePlayerOrg, DIALOG_STYLE_INPUT, !"Пригласить игрока", !"{FFFFFF}Введите ID игрока, которого Вы хотите пригласить:", !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dInvitePlayerOrg, DIALOG_STYLE_INPUT, !"РџСЂРёРіР»Р°СЃРёС‚СЊ РёРіСЂРѕРєР°", !"{FFFFFF}Р’РІРµРґРёС‚Рµ ID РёРіСЂРѕРєР°, РєРѕС‚РѕСЂРѕРіРѕ Р’С‹ С…РѕС‚РёС‚Рµ РїСЂРёРіР»Р°СЃРёС‚СЊ:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 
 			cmd_orginvite(playerid, inputtext);
 		}
@@ -336,7 +336,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			pInfo[playerid][pCurrentListitem] = listitem;
 
-			ShowPlayerDialog(playerid, dChangeRanksInputOrg, DIALOG_STYLE_INPUT, !"Название ранга", !"{FFFFFF}Введите новое название для данного ранга (макс. длина - 64 символа):", !"Далее", !"Отмена");
+			ShowPlayerDialog(playerid, dChangeRanksInputOrg, DIALOG_STYLE_INPUT, !"РќР°Р·РІР°РЅРёРµ СЂР°РЅРіР°", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РЅР°Р·РІР°РЅРёРµ РґР»СЏ РґР°РЅРЅРѕРіРѕ СЂР°РЅРіР° (РјР°РєСЃ. РґР»РёРЅР° - 64 СЃРёРјРІРѕР»Р°):", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 		}
 
 		case dChangeRanksInputOrg:
@@ -359,7 +359,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					strcat(ranks, currentRank);
 				}
 
-				return ShowPlayerDialog(playerid, dChangeRanksOrg, DIALOG_STYLE_LIST, !"Выберите ранг", ranks, !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dChangeRanksOrg, DIALOG_STYLE_LIST, !"Р’С‹Р±РµСЂРёС‚Рµ СЂР°РЅРі", ranks, !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 			}
 
 			new
@@ -368,9 +368,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				currentListitem = pInfo[playerid][pCurrentListitem];
 
 			if(sscanf(inputtext, "s[64]", rankName) || strlen(rankName) > 64)
-				return ShowPlayerDialog(playerid, dChangeRanksInputOrg, DIALOG_STYLE_INPUT, !"Название ранга", !"{FFFFFF}Введите новое название для данного ранга (макс. длина - 64 символа):", !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dChangeRanksInputOrg, DIALOG_STYLE_INPUT, !"РќР°Р·РІР°РЅРёРµ СЂР°РЅРіР°", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РЅР°Р·РІР°РЅРёРµ РґР»СЏ РґР°РЅРЅРѕРіРѕ СЂР°РЅРіР° (РјР°РєСЃ. РґР»РёРЅР° - 64 СЃРёРјРІРѕР»Р°):", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 
-			format_string("Вы сменили название ранга '%s' на '%s'", orgRanks[org][currentListitem], rankName);
+			format_string("Р’С‹ СЃРјРµРЅРёР»Рё РЅР°Р·РІР°РЅРёРµ СЂР°РЅРіР° '%s' РЅР° '%s'", orgRanks[org][currentListitem], rankName);
 			SendClientMessage(playerid, 0x00FF00FF, formatString);
 
 			SetString(orgRanks[org][currentListitem], rankName);
@@ -387,7 +387,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				rank;
 			
 			if(sscanf(inputtext, "p<,>dd", targetid, rank))
-				return ShowPlayerDialog(playerid, dSetRankOrg, DIALOG_STYLE_INPUT, !"Изменить ранг игроку", !"{FFFFFF}Введите ID игрока и ранг через запятую\n\n{AFAFAF}Например: 34,2", !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dSetRankOrg, DIALOG_STYLE_INPUT, !"РР·РјРµРЅРёС‚СЊ СЂР°РЅРі РёРіСЂРѕРєСѓ", !"{FFFFFF}Р’РІРµРґРёС‚Рµ ID РёРіСЂРѕРєР° Рё СЂР°РЅРі С‡РµСЂРµР· Р·Р°РїСЏС‚СѓСЋ\n\n{AFAFAF}РќР°РїСЂРёРјРµСЂ: 34,2", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 		
 			cmd_orgsetrank(playerid, inputtext);
 		}
@@ -401,7 +401,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				targetid;
 
 			if(sscanf(inputtext, "d", targetid))
-				return ShowPlayerDialog(playerid, dUninviteOrg, DIALOG_STYLE_INPUT, !"Выгнать игрока Online", !"{FFFFFF}Введите ID игрока, которого Вы хотите выгнать:", !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dUninviteOrg, DIALOG_STYLE_INPUT, !"Р’С‹РіРЅР°С‚СЊ РёРіСЂРѕРєР° Online", !"{FFFFFF}Р’РІРµРґРёС‚Рµ ID РёРіСЂРѕРєР°, РєРѕС‚РѕСЂРѕРіРѕ Р’С‹ С…РѕС‚РёС‚Рµ РІС‹РіРЅР°С‚СЊ:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 			
 			cmd_orguninvite(playerid, inputtext);
 		}
@@ -415,7 +415,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				offUninviteStr[MAX_PLAYER_NAME];
 
 			if(sscanf(inputtext, "s[64]", offUninviteStr))
-				return ShowPlayerDialog(playerid, dOffUninviteOrg, DIALOG_STYLE_INPUT, !"Выгнать игрока Offline", !"{FFFFFF}Введите ник игрока, которого Вы хотите выгнать в Offline:", !"Далее", !"Отмена");
+				return ShowPlayerDialog(playerid, dOffUninviteOrg, DIALOG_STYLE_INPUT, !"Р’С‹РіРЅР°С‚СЊ РёРіСЂРѕРєР° Offline", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅРёРє РёРіСЂРѕРєР°, РєРѕС‚РѕСЂРѕРіРѕ Р’С‹ С…РѕС‚РёС‚Рµ РІС‹РіРЅР°С‚СЊ РІ Offline:", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 			
 			cmd_orgoffuninvite(playerid, offUninviteStr);
 		}
@@ -444,11 +444,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SaveAccount(i);
 					
 					if(i != playerid)
-						SendClientMessage(i, 0xFF0000FF, !"[O] Ваша организация была распущена лидером");
+						SendClientMessage(i, 0xFF0000FF, !"[O] Р’Р°С€Р° РѕСЂРіР°РЅРёР·Р°С†РёСЏ Р±С‹Р»Р° СЂР°СЃРїСѓС‰РµРЅР° Р»РёРґРµСЂРѕРј");
 				}
 			}
 
-			SendClientMessage(playerid, 0xFF0000FF, !"Вы распустили организацию");
+			SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СЂР°СЃРїСѓСЃС‚РёР»Рё РѕСЂРіР°РЅРёР·Р°С†РёСЋ");
 
 			ClearOrganization(org);
 		}
@@ -465,9 +465,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 CMD:orgcreate(playerid, params[])
 {
 	if(pInfo[playerid][pOrganization] != 0)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы уже состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓР¶Рµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
-	ShowPlayerDialog(playerid, dCreateOrg, DIALOG_STYLE_INPUT, !"Создание организации", !"{FFFFFF}Введите название организации (макс. длина - 64 символа):", !"Далее", !"Отмена");
+	ShowPlayerDialog(playerid, dCreateOrg, DIALOG_STYLE_INPUT, !"РЎРѕР·РґР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё", !"{FFFFFF}Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё (РјР°РєСЃ. РґР»РёРЅР° - 64 СЃРёРјРІРѕР»Р°):", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 
 	return 1;
 }
@@ -478,13 +478,13 @@ CMD:orgleave(playerid)
 		org = pInfo[playerid][pOrganization];
 	
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 	
-	ShowPlayerDialog(playerid, dLeaveOrg, DIALOG_STYLE_MSGBOX, !"Покинуть организцаию", 
+	ShowPlayerDialog(playerid, dLeaveOrg, DIALOG_STYLE_MSGBOX, !"РџРѕРєРёРЅСѓС‚СЊ РѕСЂРіР°РЅРёР·С†Р°РёСЋ", 
 		(GetString(orgInfo[org][orgLeader], GetName(playerid))) ?
-		(!"{FFFFFF}Вы являетесь лидером организации. Если Вы покинете её, она будет распущена.") :
-		(!"{FFFFFF}Вы действительно хотите покинуть организацию?"),
-	!"Далее", !"Отмена");
+		(!"{FFFFFF}Р’С‹ СЏРІР»СЏРµС‚РµСЃСЊ Р»РёРґРµСЂРѕРј РѕСЂРіР°РЅРёР·Р°С†РёРё. Р•СЃР»Рё Р’С‹ РїРѕРєРёРЅРµС‚Рµ РµС‘, РѕРЅР° Р±СѓРґРµС‚ СЂР°СЃРїСѓС‰РµРЅР°.") :
+		(!"{FFFFFF}Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ РїРѕРєРёРЅСѓС‚СЊ РѕСЂРіР°РЅРёР·Р°С†РёСЋ?"),
+	!"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 
 	return 1;
 }
@@ -495,19 +495,19 @@ CMD:orginvite(playerid, params[])
 		org = pInfo[playerid][pOrganization];
 
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
 	else if(pInfo[playerid][pOrgRank] < MAX_RANKS - 1)
-		return SendClientMessage(playerid, 0xFF0000FF, !"У Вас недостаточно высокий ранг");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РЈ Р’Р°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС‹СЃРѕРєРёР№ СЂР°РЅРі");
 
 	else if(sscanf(params, "d", params[0]))
-		return SendClientMessage(playerid, -1, !"Введите: /orginvite [id игрока]");
+		return SendClientMessage(playerid, -1, !"Р’РІРµРґРёС‚Рµ: /orginvite [id РёРіСЂРѕРєР°]");
 
 	else if(params[0] == playerid)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы указали свой ID");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓРєР°Р·Р°Р»Рё СЃРІРѕР№ ID");
 
 	else if(!IsValidID(playerid))
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы указали неверный ID");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓРєР°Р·Р°Р»Рё РЅРµРІРµСЂРЅС‹Р№ ID");
 	
 	new
 		Float:X,
@@ -516,16 +516,16 @@ CMD:orginvite(playerid, params[])
 
 	GetPlayerPos(params[0], X, Y, Z);
 	if(GetPlayerDistanceFromPoint(playerid, X, Y, Z) > 10.0)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы должны находиться рядом с игроком");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РґРѕР»Р¶РЅС‹ РЅР°С…РѕРґРёС‚СЊСЃСЏ СЂСЏРґРѕРј СЃ РёРіСЂРѕРєРѕРј");
 
 	else if(pInfo[params[0]][pOrganization] != 0)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Игрок уже состоит в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РРіСЂРѕРє СѓР¶Рµ СЃРѕСЃС‚РѕРёС‚ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 	
-	format_string("Вы предложили %s присоединиться к Вашей организации", GetName(params[0]));
+	format_string("Р’С‹ РїСЂРµРґР»РѕР¶РёР»Рё %s РїСЂРёСЃРѕРµРґРёРЅРёС‚СЊСЃСЏ Рє Р’Р°С€РµР№ РѕСЂРіР°РЅРёР·Р°С†РёРё", GetName(params[0]));
 	SendClientMessage(playerid, 0x00FF00FF, formatString);
 
-	format_string("{FFFFFF}%s предложил Вам присоединиться к организации\n{FFFF00}'%s'\n{FFFFFF}Вы согласны?", GetName(playerid), orgInfo[org][orgName]);
-	ShowPlayerDialog(params[0], dInviteOrg, DIALOG_STYLE_MSGBOX, !"Вступить в организацию", formatString, !"Да", !"Отмена");
+	format_string("{FFFFFF}%s РїСЂРµРґР»РѕР¶РёР» Р’Р°Рј РїСЂРёСЃРѕРµРґРёРЅРёС‚СЊСЃСЏ Рє РѕСЂРіР°РЅРёР·Р°С†РёРё\n{FFFF00}'%s'\n{FFFFFF}Р’С‹ СЃРѕРіР»Р°СЃРЅС‹?", GetName(playerid), orgInfo[org][orgName]);
+	ShowPlayerDialog(params[0], dInviteOrg, DIALOG_STYLE_MSGBOX, !"Р’СЃС‚СѓРїРёС‚СЊ РІ РѕСЂРіР°РЅРёР·Р°С†РёСЋ", formatString, !"Р”Р°", !"РћС‚РјРµРЅР°");
 
 	pInfo[params[0]][pOfferPlayer] = playerid;
 
@@ -538,30 +538,30 @@ CMD:orguninvite(playerid, params[])
 		org = pInfo[playerid][pOrganization];
 
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
 	else if(pInfo[playerid][pOrgRank] < MAX_RANKS - 1)
-		return SendClientMessage(playerid, 0xFF0000FF, !"У Вас недостаточно высокий ранг");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РЈ Р’Р°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС‹СЃРѕРєРёР№ СЂР°РЅРі");
 
 	else if(sscanf(params, "d", params[0]))
-		return SendClientMessage(playerid, -1, !"Введите: /orguninvite [id игрока]");
+		return SendClientMessage(playerid, -1, !"Р’РІРµРґРёС‚Рµ: /orguninvite [id РёРіСЂРѕРєР°]");
 
 	else if(params[0] == playerid)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы указали свой ID");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓРєР°Р·Р°Р»Рё СЃРІРѕР№ ID");
 
 	else if(!IsValidID(playerid))
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы указали неверный ID");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓРєР°Р·Р°Р»Рё РЅРµРІРµСЂРЅС‹Р№ ID");
 
 	else if(pInfo[params[0]][pOrganization] != org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Игрок не состоит в Вашей организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РРіСЂРѕРє РЅРµ СЃРѕСЃС‚РѕРёС‚ РІ Р’Р°С€РµР№ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 	
 	else if(pInfo[params[0]][pOrgRank] >= pInfo[playerid][pOrgRank])
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не можете выгнать этого игрока");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ РІС‹РіРЅР°С‚СЊ СЌС‚РѕРіРѕ РёРіСЂРѕРєР°");
 	
-	format_string("Вы выгнали %s из организации", GetName(params[0]));
+	format_string("Р’С‹ РІС‹РіРЅР°Р»Рё %s РёР· РѕСЂРіР°РЅРёР·Р°С†РёРё", GetName(params[0]));
 	SendClientMessage(playerid, 0xFF0000FF, formatString);
 
-	format_string("%s выгнал Вас из организации", GetName(playerid));
+	format_string("%s РІС‹РіРЅР°Р» Р’Р°СЃ РёР· РѕСЂРіР°РЅРёР·Р°С†РёРё", GetName(playerid));
 	SendClientMessage(params[0], 0xFF0000FF, formatString);
 
 	pInfo[params[0]][pOrganization] =
@@ -579,16 +579,16 @@ CMD:orgoffuninvite(playerid, params[])
 		name[32];
 
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
 	else if(pInfo[playerid][pOrgRank] < MAX_RANKS - 1)
-		return SendClientMessage(playerid, 0xFF0000FF, !"У Вас недостаточно высокий ранг");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РЈ Р’Р°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС‹СЃРѕРєРёР№ СЂР°РЅРі");
 
 	else if(sscanf(params, "s[32]", name))
-		return SendClientMessage(playerid, -1, !"Введите: /orgoffuninvite [ник игрока]");
+		return SendClientMessage(playerid, -1, !"Р’РІРµРґРёС‚Рµ: /orgoffuninvite [РЅРёРє РёРіСЂРѕРєР°]");
 
 	else if(GetPlayerID(name) != INVALID_PLAYER_ID)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Игрок в сети. Используйте команду /orguninvite");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РРіСЂРѕРє РІ СЃРµС‚Рё. РСЃРїРѕР»СЊР·СѓР№С‚Рµ РєРѕРјР°РЅРґСѓ /orguninvite");
 
 	format_mysql("SELECT `org_rank` FROM `accounts` WHERE name = '%s' AND organization = %d", name, org);
 	mysql_tquery(dbHandle, mysqlString, "@OrgOffUninvite", "is", playerid, name);
@@ -603,9 +603,9 @@ CMD:orgonline(playerid)
 		num = 0;
 
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
-	SendClientMessage(playerid, 0xFFFF00FF, !"Члены организации в сети:");
+	SendClientMessage(playerid, 0xFFFF00FF, !"Р§Р»РµРЅС‹ РѕСЂРіР°РЅРёР·Р°С†РёРё РІ СЃРµС‚Рё:");
 
 	foreach(new i : Player)
 	{
@@ -618,7 +618,7 @@ CMD:orgonline(playerid)
 		}
 	}
 
-	format_string("Всего: %d человек(-а)", num);
+	format_string("Р’СЃРµРіРѕ: %d С‡РµР»РѕРІРµРє(-Р°)", num);
 	SendClientMessage(playerid, 0xFFFF00FF, formatString);
 
 	return 1;
@@ -631,10 +631,10 @@ CMD:orgchat(playerid, params[])
 		text[128];
 	
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
 	if(sscanf(params, "s[128]", text))
-		return SendClientMessage(playerid, -1, !"Введите: /orgchat [сообщение]");
+		return SendClientMessage(playerid, -1, !"Р’РІРµРґРёС‚Рµ: /orgchat [СЃРѕРѕР±С‰РµРЅРёРµ]");
 	
 	foreach(new i : Player)
 	{
@@ -654,35 +654,35 @@ CMD:orgsetrank(playerid, params[])
 		org = pInfo[playerid][pOrganization];
 
 	if(!org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
 	else if(pInfo[playerid][pOrgRank] < MAX_RANKS - 1)
-		return SendClientMessage(playerid, 0xFF0000FF, !"У Вас недостаточно высокий ранг");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РЈ Р’Р°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС‹СЃРѕРєРёР№ СЂР°РЅРі");
 
 	else if(sscanf(params, "dd", params[0], params[1]) || !(1 < params[1] < MAX_RANKS))
-		return SendClientMessage(playerid, -1, !"Введите: /orgsetrank [id игрока] [ранг]");
+		return SendClientMessage(playerid, -1, !"Р’РІРµРґРёС‚Рµ: /orgsetrank [id РёРіСЂРѕРєР°] [СЂР°РЅРі]");
 
 	else if(params[0] == playerid)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы указали свой ID");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓРєР°Р·Р°Р»Рё СЃРІРѕР№ ID");
 
 	else if(!IsValidID(playerid))
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы указали неверный ID");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ СѓРєР°Р·Р°Р»Рё РЅРµРІРµСЂРЅС‹Р№ ID");
 
 	else if(pInfo[params[0]][pOrganization] != org)
-		return SendClientMessage(playerid, 0xFF0000FF, !"Игрок не состоит в Вашей организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РРіСЂРѕРє РЅРµ СЃРѕСЃС‚РѕРёС‚ РІ Р’Р°С€РµР№ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 	
 	else if(params[1] >= pInfo[playerid][pOrgRank])
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не можете выдать этот ранг");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ РІС‹РґР°С‚СЊ СЌС‚РѕС‚ СЂР°РЅРі");
 	
 	else if(pInfo[params[0]][pOrgRank] >= pInfo[playerid][pOrgRank])
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не можете изменять ранг этого игрока");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ РёР·РјРµРЅСЏС‚СЊ СЂР°РЅРі СЌС‚РѕРіРѕ РёРіСЂРѕРєР°");
 	
 	pInfo[params[0]][pOrgRank] = params[1];
 
-	format_string("Вы выдали %s %d ранг", GetName(params[0]), params[1]);
+	format_string("Р’С‹ РІС‹РґР°Р»Рё %s %d СЂР°РЅРі", GetName(params[0]), params[1]);
 	SendClientMessage(playerid, 0xFFFF00FF, formatString);
 
-	format_string("%s выдал Вам %d ранг", GetName(playerid), params[1]);
+	format_string("%s РІС‹РґР°Р» Р’Р°Рј %d СЂР°РЅРі", GetName(playerid), params[1]);
 	SendClientMessage(params[0], 0xFFFF00FF, formatString);
 
 	SaveAccount(params[0]);
@@ -693,20 +693,20 @@ CMD:orgsetrank(playerid, params[])
 CMD:orgpanel(playerid)
 {
 	if(!pInfo[playerid][pOrganization])
-		return SendClientMessage(playerid, 0xFF0000FF, !"Вы не состоите в организации");
+		return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ СЃРѕСЃС‚РѕРёС‚Рµ РІ РѕСЂРіР°РЅРёР·Р°С†РёРё");
 
 	else if(pInfo[playerid][pOrgRank] < MAX_RANKS - 1)
-		return SendClientMessage(playerid, 0xFF0000FF, !"У Вас недостаточно высокий ранг");
+		return SendClientMessage(playerid, 0xFF0000FF, !"РЈ Р’Р°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС‹СЃРѕРєРёР№ СЂР°РЅРі");
 	
-	ShowPlayerDialog(playerid, dPanelOrg, DIALOG_STYLE_LIST, !"Управление организацией", !"\
-				1. Члены организации в сети\n\
-				2. Сменить название организации\n\
-				3. Пригласить игрока\n\
-				4. Изменить название рангов\n\
-				5. Изменить ранг игрока\n\
-				6. Выгнать игрока {00FF00}Online{FFFFFF}\n\
-				7. Выгнать игрока {FF0000}Offline{FFFFFF}\n\
-				8. Распустить организацию", !"Далее", !"Отмена");
+	ShowPlayerDialog(playerid, dPanelOrg, DIALOG_STYLE_LIST, !"РЈРїСЂР°РІР»РµРЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРµР№", !"\
+				1. Р§Р»РµРЅС‹ РѕСЂРіР°РЅРёР·Р°С†РёРё РІ СЃРµС‚Рё\n\
+				2. РЎРјРµРЅРёС‚СЊ РЅР°Р·РІР°РЅРёРµ РѕСЂРіР°РЅРёР·Р°С†РёРё\n\
+				3. РџСЂРёРіР»Р°СЃРёС‚СЊ РёРіСЂРѕРєР°\n\
+				4. РР·РјРµРЅРёС‚СЊ РЅР°Р·РІР°РЅРёРµ СЂР°РЅРіРѕРІ\n\
+				5. РР·РјРµРЅРёС‚СЊ СЂР°РЅРі РёРіСЂРѕРєР°\n\
+				6. Р’С‹РіРЅР°С‚СЊ РёРіСЂРѕРєР° {00FF00}Online{FFFFFF}\n\
+				7. Р’С‹РіРЅР°С‚СЊ РёРіСЂРѕРєР° {FF0000}Offline{FFFFFF}\n\
+				8. Р Р°СЃРїСѓСЃС‚РёС‚СЊ РѕСЂРіР°РЅРёР·Р°С†РёСЋ", !"Р”Р°Р»РµРµ", !"РћС‚РјРµРЅР°");
 
 	return 1;
 }
@@ -884,7 +884,7 @@ stock SaveOrganization(org)
 		new
 			rankName[7];
 
-		format(rankName, sizeof rankName, "%d ранг", i + 1);
+		format(rankName, sizeof rankName, "%d СЂР°РЅРі", i + 1);
 		SetString(orgRanks[id][i], rankName);
 	}
 
@@ -903,16 +903,16 @@ stock SaveOrganization(org)
 	if(rows)
 	{
 		if(cache_get_row_int(0, 0, dbHandle) >= pInfo[playerid][pOrgRank])
-			return SendClientMessage(playerid, 0xFF0000FF, !"Вы не можете выгнать этого игрока");
+			return SendClientMessage(playerid, 0xFF0000FF, !"Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ РІС‹РіРЅР°С‚СЊ СЌС‚РѕРіРѕ РёРіСЂРѕРєР°");
  
 		format_mysql("UPDATE `accounts` SET `organization` = 0 AND `org_rank` = 0 WHERE name = '%s'", name);
 		mysql_tquery(dbHandle, mysqlString, "", "");
 
-		format_string("Вы выгнали %s из организации", name);
+		format_string("Р’С‹ РІС‹РіРЅР°Р»Рё %s РёР· РѕСЂРіР°РЅРёР·Р°С†РёРё", name);
 		SendClientMessage(playerid, 0xFF0000FF, formatString);
 	}
 	else
-		return SendClientMessage(playerid, 0xFF0000FF, !"Игрок не найден или не состоит в Вашей организации"); 
+		return SendClientMessage(playerid, 0xFF0000FF, !"РРіСЂРѕРє РЅРµ РЅР°Р№РґРµРЅ РёР»Рё РЅРµ СЃРѕСЃС‚РѕРёС‚ РІ Р’Р°С€РµР№ РѕСЂРіР°РЅРёР·Р°С†РёРё"); 
 
 	return 1;
 }
