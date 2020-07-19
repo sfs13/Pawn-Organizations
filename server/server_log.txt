@@ -1,0 +1,53 @@
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[13:11:44] filterscripts = ""  (string)
+[13:11:44] 
+[13:11:44] Server Plugins
+[13:11:44] --------------
+[13:11:44]  Loading plugin: crashdetect
+[13:11:44]   CrashDetect v4.15.1 is OK.
+[13:11:44]   Loaded.
+[13:11:44]  Loading plugin: mysql
+[13:11:45]  >> plugin.mysql: R39-6 successfully loaded.
+[13:11:45]   Loaded.
+[13:11:45]  Loading plugin: sscanf
+[13:11:45] 
+
+[13:11:45]  ===============================
+
+[13:11:45]       sscanf plugin loaded.     
+
+[13:11:45]          Version:  2.8.1        
+
+[13:11:45]    (c) 2012 Alex "Y_Less" Cole  
+
+[13:11:45]  ===============================
+
+[13:11:45]   Loaded.
+[13:11:45]  Loaded 3 plugins.
+
+[13:11:45] 
+[13:11:45] Filterscripts
+[13:11:45] ---------------
+[13:11:45]   Loaded 0 filterscripts.
+
+[13:11:47] Number of vehicle models: 0
+[13:12:33] [connection] 127.0.0.1:61937 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61937 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61937 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61937 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61937 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61937 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61938 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61938 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61938 requests connection cookie.
+[13:12:33] [connection] 127.0.0.1:61938 requests connection cookie.
+[13:12:34] [connection] incoming connection: 127.0.0.1:61938 id: 0
+[13:12:36] [join] Nils_Lind has joined the server (0:127.0.0.1)
